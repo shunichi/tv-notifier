@@ -1,0 +1,6 @@
+%h1 Hello
+
+- if user_signed_in?
+  = link_to '通知先登録', user_line_notify_omniauth_authorize_path
+- else
+  = link_to 'LINEログイン', user_line_omniauth_authorize_path

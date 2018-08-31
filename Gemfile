@@ -33,6 +33,14 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'sassc'
+gem 'hamlit-rails'
+gem 'omniauth'
+gem 'omniauth-line'
+gem 'omniauth-line-notify'
+gem 'devise'
+gem 'dotenv-rails'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
