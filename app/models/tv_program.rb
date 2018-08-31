@@ -21,6 +21,8 @@ class TvProgram
         link = item.link.gsub(/\Ahttp:/, 'https:').gsub(/\?from=rss\z/, '')
         Item.new(item.title, item.description, link)
       end
+    rescue RSS::MissingTagError
+      []
     end
   end
 end

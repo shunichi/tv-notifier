@@ -2,8 +2,12 @@ class SearchKeyword < ApplicationRecord
   belongs_to :user
   validates :keyword, presence: true
 
+  NOTIFICATION_ITEM_MAX = 10
+
   def search_and_notify
-    item_messages = TvProgram.search(keyword).map do |item|
+    items = TvProgram.search(keyword)
+    return if items.blank?
+    item_messages = items.take(NOTIFICATION_ITEM_MAX).map do |item|
       <<~EOS
       ■ #{item.title}
       #{item.description}
