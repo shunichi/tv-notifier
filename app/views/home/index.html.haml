@@ -1,6 +1,8 @@
-%h1 Hello
+%h1 TV番組お知らせくん
 
 - if user_signed_in?
   = link_to '通知先登録', user_line_notify_omniauth_authorize_path
+  = link_to '検索キーワード', search_keywords_path
 - else
   = link_to 'LINEログイン', user_line_omniauth_authorize_path
+

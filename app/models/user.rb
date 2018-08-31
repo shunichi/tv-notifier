@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :rememberable,
          :omniauthable, omniauth_providers: %i(line line_notify)
   has_many :line_notification_targets, dependent: :destroy
+  has_many :search_keywords, dependent: :destroy
 
   class << self
     def find_or_create_by_auth_hash!(hash)

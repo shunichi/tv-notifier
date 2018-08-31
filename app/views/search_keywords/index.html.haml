@@ -1,0 +1,19 @@
+%h1 検索キーワード一覧
+
+%table
+  %thead
+    %tr
+      %th キーワード
+      %th
+      %th
+
+  %tbody
+    - @search_keywords.each do |search_keyword|
+      %tr
+        %td= search_keyword.keyword
+        %td= link_to '編集', edit_search_keyword_path(search_keyword)
+        %td= link_to '削除', search_keyword, method: :delete, data: { confirm: '削除してもよろしいですか?' }
+
+%br
+
+= link_to '新規登録', new_search_keyword_path

@@ -8,6 +8,8 @@ class TvProgram
   def initialize()
   end
 
+  Item = Struct.new(:title, :description, :link)
+
   class << self
     def search_url(keyword)
       "https://tv.so-net.ne.jp/rss/schedulesBySearch.action?condition.keyword=#{URI.escape(keyword)}&stationPlatformId=0"
@@ -15,11 +17,9 @@ class TvProgram
 
     def search(keyword)
       rss = RSS::Parser.parse(search_url(keyword))
-      rss.items.each do |item|
-        puts '*********'
-        puts "title: #{item.title}"
-        puts "description: #{item.description}"
-        puts "link: #{item.link}"
+      rss.items.map do |item|
+        link = item.link.gsub(/\Ahttp:/, 'https:').gsub(/\?from=rss\z/, '')
+        Item.new(item.title, item.description, link)
       end
     end
   end
