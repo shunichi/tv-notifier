@@ -15,7 +15,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     params = request.env['omniauth.params']
     token = auth['credentials']['token']
 
-    current_user.line_notification_targets.create!(token: token, auth_hash: auth)
+    # 今のところ一つだけ登録可能
+    LineNotificationTarget.transaction do
+      current_user.line_notification_targets.destroy_all
+      current_user.line_notification_targets.create!(token: token, auth_hash: auth)
+    end
     redirect_to root_url, notice: notice
   end
 end
