@@ -40,6 +40,7 @@ gem 'omniauth-line'
 gem 'omniauth-line-notify'
 gem 'devise'
 gem 'dotenv-rails'
+gem 'bugsnag'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
