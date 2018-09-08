@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_31_060317) do
+ActiveRecord::Schema.define(version: 2018_09_08_171848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,20 @@ ActiveRecord::Schema.define(version: 2018_08_31_060317) do
     t.index ["user_id"], name: "index_search_keywords_on_user_id"
   end
 
+  create_table "tv_programs", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "search_keyword_id"
+    t.string "url", default: "", null: false
+    t.string "keyword", default: "", null: false
+    t.datetime "start_at", null: false
+    t.string "title", default: "", null: false
+    t.string "description", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["search_keyword_id"], name: "index_tv_programs_on_search_keyword_id"
+    t.index ["user_id"], name: "index_tv_programs_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "remember_created_at"
     t.string "uid"
@@ -48,4 +62,6 @@ ActiveRecord::Schema.define(version: 2018_08_31_060317) do
 
   add_foreign_key "line_notification_targets", "users"
   add_foreign_key "search_keywords", "users"
+  add_foreign_key "tv_programs", "search_keywords"
+  add_foreign_key "tv_programs", "users"
 end

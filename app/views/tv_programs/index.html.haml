@@ -1,0 +1,10 @@
+%h2 通知履歴
+
+%ul
+  - @tv_programs.each do |tv_program|
+    %li
+      = link_to tv_program.url, target: :_blank do
+        [#{tv_program.keyword}]
+        = tv_program.description
+        = tv_program.title
+

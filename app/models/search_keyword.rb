@@ -1,13 +1,29 @@
 class SearchKeyword < ApplicationRecord
   belongs_to :user
+  has_many :tv_programs, dependent: :nullify
   validates :keyword, presence: true
 
   NOTIFICATION_ITEM_MAX = 10
 
   def search_and_notify
-    items = TvProgram.search(keyword)
+    items = TvProgram::Collector.search(keyword)
+    urls = TvProgram.where(url: items.map(&:link)).pluck(:url)
+    items = items.reject { |item| urls.member?(item.link) }
+    items = items.take(NOTIFICATION_ITEM_MAX)
     return if items.blank?
-    item_messages = items.take(NOTIFICATION_ITEM_MAX).map do |item|
+    TvProgram.transaction do
+      items.each do |item|
+        tv_programs.create!(
+          user: user,
+          keyword: keyword,
+          url: item.link,
+          start_at: item.date,
+          title: item.title,
+          description: item.description
+        )
+      end
+    end
+    item_messages = items.map do |item|
       <<~EOS
       ■ #{item.title}
       #{item.description}
