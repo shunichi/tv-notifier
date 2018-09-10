@@ -1,0 +1,13 @@
+.navbar.navbar-expand-lg.navbar-dark.bg-primary
+  = link_to root_path, class: 'navbar-brand' do
+    = icon('fas', 'tv')
+    TV番組お知らせくん
+  - if user_signed_in?
+    %button.navbar-toggler{type: "button", data: {toggle: "collapse", target: "#navbarNavAltMarkup"}, aria: {controls: "navbarNavAltMarkup", expanded: "false", label: "Toggle navigation"}}
+      %span.navbar-toggler-icon
+    .collapse.navbar-collapse.justify-content-end#navbarNavAltMarkup
+      %ul.navbar-nav
+        %li.nav-item.dropdown
+          = link_to icon('fas', 'user', current_user.name), '#', id: 'navbarDropdownMenuLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}
+          .dropdown-menu
+            = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item'
