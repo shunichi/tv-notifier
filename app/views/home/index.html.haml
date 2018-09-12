@@ -1,11 +1,11 @@
 - if user_signed_in?
   .text-center.mt-3
-    = link_to '検索キーワード', search_keywords_path, class: 'btn btn-lg btn-primary'
+    = link_to 'キーワード', search_keywords_path, class: 'btn btn-lg btn-primary'
   .text-center.mt-3
     = link_to '通知履歴', tv_programs_path, class: 'btn btn-lg btn-secondary'
   .text-center.mt-3
     = link_to '通知先登録', user_line_notify_omniauth_authorize_path, class: 'btn btn-lg btn-info'
 - else
-  .text-center
+  .text-center.mt-3
     = link_to 'LINEログイン', user_line_omniauth_authorize_path, class: 'btn btn-lg btn-success'
 

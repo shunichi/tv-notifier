@@ -9,6 +9,6 @@ Rails.application.routes.draw do
     delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
   end
 
-  resources :search_keywords
+  resources :search_keywords, only: %i(index create destroy)
   resources :tv_programs
 end

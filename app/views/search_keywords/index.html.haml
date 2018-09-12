@@ -1,19 +1,12 @@
-%h2 検索キーワード一覧
+%h2 キーワード
 
-%table
-  %thead
-    %tr
-      %th キーワード
-      %th
-      %th
-
-  %tbody
-    - @search_keywords.each do |search_keyword|
-      %tr
-        %td= search_keyword.keyword
-        %td= link_to '編集', edit_search_keyword_path(search_keyword)
-        %td= link_to '削除', search_keyword, method: :delete, data: { confirm: '削除してもよろしいですか?' }
-
+- @search_keywords.each do |search_keyword|
+  .card.mt-2
+    .card-body
+      = search_keyword.keyword
+      = link_to '削除', search_keyword, class: 'card-link', method: :delete, data: { confirm: '削除してもよろしいですか?' }
 %br
-
-= link_to '新規登録', new_search_keyword_path
+= form_for SearchKeyword.new, html: { class: 'js-presence-check' } do |f|
+  .form-group
+    = f.text_field :keyword, class: 'form-control', placeholder: 'キーワードを入力してください'
+  = f.button 'キーワードを登録', class: 'btn btn-primary'

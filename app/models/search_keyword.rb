@@ -2,6 +2,7 @@ class SearchKeyword < ApplicationRecord
   belongs_to :user
   has_many :tv_programs, dependent: :nullify
   validates :keyword, presence: true
+  scope :default_order, -> { order(id: :desc) }
 
   NOTIFICATION_ITEM_MAX = 20
   NOTIFICATION_ITEMS_PER_MESSAGE = 5
