@@ -11,8 +11,8 @@ const updateButtonStatus = ($form) => {
 
 $(() => {
   const $checkForm = $('.js-presence-check');
-  $checkForm.on('change', (e) => {
-    updateButtonStatus($(e.currentTarget));
+  $checkForm.find('input[type="text"]').on('keyup', (e) => {
+    updateButtonStatus($(e.currentTarget).closest('form'));
   });
   updateButtonStatus($checkForm);
 });

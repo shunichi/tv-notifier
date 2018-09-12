@@ -13,7 +13,7 @@ class SearchKeywordsController < ApplicationController
       if @search_keyword.save
         format.html { redirect_to search_keywords_url, notice: '検索キーワードを登録しました' }
       else
-        format.html { render :new }
+        format.html { redirect_to search_keywords_url }
       end
     end
   end
@@ -22,7 +22,6 @@ class SearchKeywordsController < ApplicationController
     @search_keyword.destroy
     respond_to do |format|
       format.html { redirect_to search_keywords_url, notice: '検索キーワードを削除しました' }
-      format.json { head :no_content }
     end
   end
 
