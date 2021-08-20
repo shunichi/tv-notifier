@@ -4,8 +4,8 @@
   .text-center.mt-3
     = link_to '通知履歴', tv_programs_path, class: 'btn btn-lg btn-secondary'
   .text-center.mt-3
-    = link_to '通知先登録', user_line_notify_omniauth_authorize_path, class: 'btn btn-lg btn-info'
+    = button_to '通知先登録', user_line_notify_omniauth_authorize_path, class: 'btn btn-lg btn-info'
 - else
   .text-center.mt-3
-    = link_to 'LINEログイン', user_line_omniauth_authorize_path, class: 'btn btn-lg btn-success'
+    = button_to 'LINEログイン', user_line_omniauth_authorize_path, class: 'btn btn-lg btn-success'
 
